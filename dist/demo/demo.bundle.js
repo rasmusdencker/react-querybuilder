@@ -11202,7 +11202,6 @@ var Rule = function (_React$Component) {
                 getLevel = _props$schema.getLevel,
                 classNames = _props$schema.classNames;
 
-            console.log("RuleProps", this.props);
             var level = getLevel(this.props.id);
             return _react2.default.createElement(
                 'div',

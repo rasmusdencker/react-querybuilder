@@ -14,7 +14,6 @@ export default class Rule extends React.Component {
 
     render() {
         const {field, operator, value, fieldDefinition, schema: {fields, controls, getOperators, getLevel, classNames}} = this.props;
-        console.log("RuleProps", this.props)
         var level = getLevel(this.props.id);
         return (
             <div className={`rule ${classNames.rule}`}>
