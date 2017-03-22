@@ -170,6 +170,7 @@ export default class QueryBuilder extends React.Component {
         return {
             id: `r-${uniqueId()}`,
             field: fields[0].name,
+            fieldDefinition: fields[0],
             value: '',
             operator: operators[0].name
         };
@@ -183,14 +184,13 @@ export default class QueryBuilder extends React.Component {
         };
     }
 
-    getOperators(field) {
+    getOperators(field, fieldDefinition) {
         if (this.props.getOperators) {
-            const ops = this.props.getOperators(field);
+            const ops = this.props.getOperators(field, fieldDefinition);
             if (ops) {
                 return ops;
             }
         }
-
 
         return this.props.operators;
     }
@@ -288,4 +288,3 @@ export default class QueryBuilder extends React.Component {
         }
     }
 }
-
