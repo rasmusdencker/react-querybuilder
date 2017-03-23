@@ -1379,7 +1379,6 @@ var QueryBuilder = function (_React$Component) {
             return {
                 id: 'r-' + (0, _v2.default)(),
                 field: fields[0].name,
-                fieldDefinition: fields[0],
                 value: '',
                 operator: operators[0].name
             };
@@ -1395,7 +1394,18 @@ var QueryBuilder = function (_React$Component) {
         }
     }, {
         key: 'getOperators',
-        value: function getOperators(field, fieldDefinition) {
+        value: function getOperators(field) {
+            var fieldDefinition = void 0;
+
+            for (var i = 0; i < this.props.fields.length; i++) {
+                var def = this.props.fields[i];
+
+                if (def.name === field) {
+                    fieldDefinition = (0, _cloneDeep2.default)(def);
+                    break;
+                }
+            }
+
             if (this.props.getOperators) {
                 var ops = this.props.getOperators(field, fieldDefinition);
                 if (ops) {
@@ -1658,7 +1668,6 @@ var Rule = function (_React$Component) {
                 field = _props.field,
                 operator = _props.operator,
                 value = _props.value,
-                fieldDefinition = _props.fieldDefinition,
                 _props$schema = _props.schema,
                 fields = _props$schema.fields,
                 controls = _props$schema.controls,
@@ -1679,7 +1688,7 @@ var Rule = function (_React$Component) {
                 }),
                 _react2.default.createElement(controls.operatorSelector, {
                     field: field,
-                    options: getOperators(field, fieldDefinition),
+                    options: getOperators(field),
                     value: operator,
                     className: 'rule-operators ' + classNames.operators,
                     handleOnChange: this.onOperatorChanged,
@@ -1855,7 +1864,6 @@ var RuleGroup = function (_React$Component) {
                         rules: r.rules }) : _react2.default.createElement(_Rule2.default, { key: r.id,
                         id: r.id,
                         field: r.field,
-                        fieldDefinition: r.fieldDefinition,
                         value: r.value,
                         operator: r.operator,
                         schema: _this2.props.schema,
