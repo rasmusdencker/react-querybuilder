@@ -170,7 +170,6 @@ export default class QueryBuilder extends React.Component {
         return {
             id: `r-${uniqueId()}`,
             field: fields[0].name,
-            fieldDefinition: fields[0],
             value: '',
             operator: operators[0].name
         };
@@ -184,7 +183,19 @@ export default class QueryBuilder extends React.Component {
         };
     }
 
-    getOperators(field, fieldDefinition) {
+    getOperators(field) {
+        let fieldDefinition;
+
+        for(let i = 0; i < this.props.fields.length; i++)
+        {
+            let def = this.props.fields[i];
+
+            if(def.name === field){
+                fieldDefinition = cloneDeep(def);
+                break;
+            }
+        }
+
         if (this.props.getOperators) {
             const ops = this.props.getOperators(field, fieldDefinition);
             if (ops) {
