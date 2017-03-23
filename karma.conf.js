@@ -8,6 +8,7 @@ module.exports = function (config) {
         frameworks: ['mocha', 'chai', 'es6-shim'],
 
         files: [
+            'node_modules/babel-polyfill/dist/polyfill.js',
             testFileGlob
         ],
         exclude: [],
